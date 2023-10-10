@@ -26,6 +26,7 @@ body {
     justify-content: flex-end;
     align-items: center;
     padding: 8px;
+    gap: 16px;
 }
 
 .row {
