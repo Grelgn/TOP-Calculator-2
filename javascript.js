@@ -1,17 +1,17 @@
 function add(a, b) {
-    return a + b;
+    return Math.round(((a + b) + Number.EPSILON) * 100) / 100;
 }
 
 function subtract(a, b) {
-    return a - b;
+    return Math.round(((a - b) + Number.EPSILON) * 100) / 100;
 }
 
 function multiply(a, b) {
-    return a * b;
+    return Math.round(((a * b) + Number.EPSILON) * 100) / 100;
 }
 
 function divide(a, b) {
-    return a / b;
+    return Math.round(((a / b) + Number.EPSILON) * 100) / 100;
 }
 
 let op;
@@ -62,9 +62,10 @@ operators.forEach((operator) => {
                 op = selectedOperator.textContent;
             }
             else {
-                calculate();
-                selectedOperator.textContent = operator.textContent;
-                op = selectedOperator.textContent;
+                if (calculate() != 'NaN') {
+                    selectedOperator.textContent = operator.textContent;
+                    op = selectedOperator.textContent;
+                };
             }
         }
     });
@@ -80,6 +81,15 @@ function calculate() {
         b = '';
         selectedOperator.textContent = '';
         op = '';
+
+        if (firstNumber.textContent == 'Infinity' || firstNumber.textContent == '-Infinity' ||firstNumber.textContent == 'NaN') {
+            firstNumber.textContent = '';
+            alert(":)")
+            a = '';
+            selectedOperator.textContent = '';
+            op = '';
+            return 'NaN';
+        }
     }
 };
 
